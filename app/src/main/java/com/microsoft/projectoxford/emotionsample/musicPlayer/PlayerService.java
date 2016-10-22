@@ -123,6 +123,21 @@ public class PlayerService extends Service implements
         if(songPosn<0){
             songPosn=songs.size();
         }
+        playSong();
+    }
+    public void pauseSong(){
+        player.pause();
+    }
+    public void resumeSong(){
+        player.start();
+
+    }
+    public void pause_startSong(){
+        if(player.isPlaying()){
+            pauseSong();
+        }else{
+            resumeSong();
+        }
     }
 
     public void setSong(int index){
