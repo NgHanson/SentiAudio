@@ -32,10 +32,12 @@
 //
 package com.microsoft.projectoxford.emotionsample;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.hardware.Camera;
+import android.hardware.camera2.*;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -50,6 +52,7 @@ import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Surface;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
@@ -70,6 +73,10 @@ import com.microsoft.projectoxford.emotionsample.helper.ImageHelper;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Face;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -77,8 +84,11 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class RecognizeActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
@@ -93,7 +103,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
 
     private EmotionServiceClient client;
 
-    private int currentCameraId = 1;
+    private int currentCameraId = 1; //Front facing
 
     //TEST
     Camera camera;
@@ -119,7 +129,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
             public void onClick(View v) {
                 try {
                     captureImage(v);
-                }catch (Exception e){
+                } catch (Exception e) {
 
                 }
             }
@@ -131,10 +141,11 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         surfaceHolder.addCallback(this);
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
 
-        camera = Camera.open(currentCameraId);
-        camera.setDisplayOrientation(90); //CAREFUL for rotation in IMAGE HELPER
         int rotation = this.getWindowManager().getDefaultDisplay().getRotation();
         Log.e("Rotation", String.valueOf(rotation));
+
+        camera = Camera.open(1);
+        camera.setDisplayOrientation(90); //CAREFUL for rotation in IMAGE HELPER
 
         jpegCallback = new Camera.PictureCallback() {
 
@@ -196,7 +207,6 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
     }
 
 
-
     public void captureImage(View v) throws IOException {
         camera.takePicture(null, null, jpegCallback);
 
@@ -235,7 +245,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         // modify parameter
         List<Camera.Size> sizes = param.getSupportedPreviewSizes();
         Camera.Size selected = sizes.get(0);
-        param.setPreviewSize(selected.width,selected.height);
+        param.setPreviewSize(selected.width, selected.height);
         camera.setParameters(param);
 
 
@@ -288,7 +298,6 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         // Do emotion detection using auto-detected faces.
         try {
             new doRequest(false).execute();
-            new doRequest(false).execute();
         } catch (Exception e) {
             Log.e("Error Exception: ", e.toString());
         }
@@ -296,7 +305,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         String faceSubscriptionKey = getString(R.string.faceSubscription_key);
         if (faceSubscriptionKey.equalsIgnoreCase("Please_add_the_face_subscription_key_here")) {
             Log.e("Fix: ", "There is no face subscription key in res/values/strings.xml.");
-        }else {
+        } else {
             // Do emotion detection using face rectangles provided by Face API.
             try {
                 new doRequest(true).execute();
@@ -307,7 +316,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
     }
 
 
-    private List<RecognizeResult> processWithAutoFaceDetection() throws EmotionServiceException, IOException {
+    private List<RecognizeResult> processWithAutoFaceDetection() throws EmotionServiceException, IOException, JSONException {
         Log.d("emotion", "Start emotion detection with auto-face detection");
 
         Gson gson = new Gson();
@@ -318,9 +327,6 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         ByteArrayInputStream inputStream = new ByteArrayInputStream(output.toByteArray());
 
         long startTime = System.currentTimeMillis();
-        // -----------------------------------------------------------------------
-        // KEY SAMPLE CODE STARTS HERE
-        // -----------------------------------------------------------------------
 
         List<RecognizeResult> result = null;
         //
@@ -329,12 +335,35 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         result = this.client.recognizeImage(inputStream);
 
         String json = gson.toJson(result);
-        Log.d("result", json);
+        Log.e("result", json);
+        try {
 
-        Log.d("emotion", String.format("Detection done. Elapsed time: %d ms", (System.currentTimeMillis() - startTime)));
-        // -----------------------------------------------------------------------
-        // KEY SAMPLE CODE ENDS HERE
-        // -----------------------------------------------------------------------
+            JSONArray jArray = new JSONArray(json);
+            JSONObject jObj = jArray.getJSONObject(0);
+            JSONObject scores = jObj.getJSONObject("scores");
+
+            HashMap<String, Double> emotionScores = new HashMap<>();
+            emotionScores.put("anger", scores.getDouble("anger"));
+            emotionScores.put("contempt", scores.getDouble("contempt"));
+            emotionScores.put("disgust", scores.getDouble("disgust"));
+            emotionScores.put("fear", scores.getDouble("fear"));
+            emotionScores.put("happiness", scores.getDouble("happiness"));
+            emotionScores.put("neutral", scores.getDouble("neutral"));
+            emotionScores.put("sadness", scores.getDouble("sadness"));
+            emotionScores.put("surprise", scores.getDouble("surprise"));
+            double maxScore = Collections.max(emotionScores.values());
+            for (Map.Entry<String, Double> entry : emotionScores.entrySet()) {
+                if (entry.getValue() == maxScore) {
+                    Log.e("Max emotion score ", entry.getKey());
+                }
+            }
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        Log.e("emotion", String.format("Detection done. Elapsed time: %d ms", (System.currentTimeMillis() - startTime)));
         return result;
     }
 
@@ -419,7 +448,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
             // Display based on error existence
 
             if (this.useFaceRectangles == false) {
-                Log.e("Doing: ","Recognizing emotions with auto-detected face rectangles...");
+                Log.e("Doing: ", "Recognizing emotions with auto-detected face rectangles...");
             } else {
                 Log.e("Doing: ", "Recognizing emotions with existing face rectangles from Face API...");
             }
@@ -428,7 +457,7 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
                 this.e = null;
             } else {
                 if (result.size() == 0) {
-                    Log.e("L","No emotion detected :(");
+                    Log.e("L", "No emotion detected :(");
                 } else {
                     Integer count = 0;
                     // Covert bitmap to a mutable bitmap by copying it
@@ -445,22 +474,6 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
                                 r.faceRectangle.left + r.faceRectangle.width,
                                 r.faceRectangle.top + r.faceRectangle.height,
                                 paint);
-                    }
-
-                    int c = 0;
-                    for (RecognizeResult r : result){
-                        Log.e("Face Count", String.valueOf(c));
-                        Log.e("Anger", String.valueOf(r.scores.anger * 100));
-                        Log.e("Contempt", String.valueOf(r.scores.contempt * 100));
-                        Log.e("Disgust", String.valueOf(r.scores.disgust * 100));
-                        Log.e("Fear", String.valueOf(r.scores.fear * 100));
-                        Log.e("Happiness", String.valueOf(r.scores.happiness * 100));
-                        Log.e("Neutral", String.valueOf(r.scores.neutral * 100));
-                        Log.e("Sadness", String.valueOf(r.scores.sadness * 100));
-                        Log.e("Surprise", String.valueOf(r.scores.surprise * 100));
-                        Log.e("Face rectangle: ", String.valueOf(r.faceRectangle.left) + " " + String.valueOf(r.faceRectangle.top) + " " + String.valueOf(r.faceRectangle.width) + " " + String.valueOf(r.faceRectangle.height));
-                        Log.e(" ", " ");
-                        c++;
                     }
 
                 }
