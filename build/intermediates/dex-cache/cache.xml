@@ -2,60 +2,94 @@
 <items version="2" >
 
     <item
-        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/libs/commons-io-2.4.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
         revision="21.1.2"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/commons-io-2.4_f73500b40e958b6d3fb401d448c1a195968a2d07.jar" />
+        sha1="d873b990759e876472bc796c884e283ef253ae32">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5378eeb8bcd2263fb967623ceee64d4774db8204\classes.dex" />
     </item>
     <item
-        jar="/Users/hansonng/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3_66e8e423b7980c4a4f86cbf76d694c25893c3b56.jar" />
-    </item>
-    <item
-        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/face/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-face-1.0.0_c0b9e732c6ed5ce41d8896354dfdce77689fcae4.jar" />
-    </item>
-    <item
-        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.3_d323cc675f24fe67f37f0e7746d482cd79ca2d2c.jar" />
-    </item>
-    <item
-        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3_4b0aac641d4b8acec2d0ca9c4f8dd9601d42edfd.jar" />
-    </item>
-    <item
-        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-21.0.3_1a7b817b9a85e549cc35486a21bd23c1133c0ab1.jar" />
-    </item>
-    <item
-        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/classes.jar"
-        jumboMode="false"
-        revision="21.1.2"
-        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-emotion-1.0.0_080950cc7f7a7c26e4656eca682fccdcce959b89.jar" />
-    </item>
-    <item
-        jar="/Users/hansonng/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.5/686c608d1805b6d4d425ec4459e88164ffc85870/gson-2.5.jar"
-        jumboMode="false"
+        is-multidex="true"
+        jar="C:\Users\christophE\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.5\686c608d1805b6d4d425ec4459e88164ffc85870\gson-2.5.jar"
+        jumboMode="true"
+        optimize="true"
         revision="21.1.2"
         sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
-        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/gson-2.5_4a68c542d03955b7bdae6e4f8e8d7d5c4efbc87d.jar" />
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.5_5a117d6e96e1bfcb38f8c87875f142d85419d228\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\face\1.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.microsoft.projectoxford-face-1.0.0_0de000131725f5469abba04afca85a249b3f7323\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\emotion\1.0.0\jars\libs\commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_da18540cd95871b1335c5b9f6d85b6824efa6d28\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="593a6a0b7a351772cef085a2e5e6fb29558bdb79">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_bc46ee70ef7efaef180f5c14c4acad9630d4d9d0\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-22.2.1_1a6c2b555619c4450fb19247749450c63cfb6d19\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-22.2.1_67a8cdbc3f5140a2675280c4d284a96b737e8bc7\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-22.2.1_32ee3364bd36c8f8363d47e8c3fcf837be26602e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-22.2.1_91d28ac7ec7129891bc50220aafde53b5d3f922f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\emotion\1.0.0\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.microsoft.projectoxford-emotion-1.0.0_15ec9241982bc057d5ad4a133d4e575e611f0f76\classes.dex" />
     </item>
 
 </items>
