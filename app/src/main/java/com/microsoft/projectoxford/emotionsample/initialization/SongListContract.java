@@ -1,8 +1,6 @@
-package initialization;
+package com.microsoft.projectoxford.emotionsample.initialization;
 
 import android.provider.BaseColumns;
-
-import org.w3c.dom.Text;
 
 /**
  * Created by christophE on 2016-10-22.
