@@ -41,6 +41,7 @@ import android.graphics.Rect;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.provider.MediaStore;
+import android.util.Log;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -134,6 +135,7 @@ public class ImageHelper {
             ExifInterface exif = new ExifInterface(imageUri.getPath());
             int orientation = exif.getAttributeInt(
                     ExifInterface.TAG_ORIENTATION, ExifInterface.ORIENTATION_NORMAL);
+                    Log.e("Orientation",String.valueOf(orientation));
 
             switch (orientation) {
                 case ExifInterface.ORIENTATION_ROTATE_270:
@@ -155,14 +157,12 @@ public class ImageHelper {
     // Rotate the original bitmap according to the given orientation angle
     private static Bitmap rotateBitmap(Bitmap bitmap, int angle) {
         // If the rotate angle is 0, then return the original image, else return the rotated image
-        if (angle != 0) {
-            Matrix matrix = new Matrix();
-            matrix.postRotate(angle);
-            return Bitmap.createBitmap(
-                    bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
-        } else {
-            return bitmap;
-        }
+        Log.e("Angle", String.valueOf(angle));
+        Matrix matrix = new Matrix();
+        matrix.postRotate(90);
+        return Bitmap.createBitmap(
+                bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
+
     }
 
 }
