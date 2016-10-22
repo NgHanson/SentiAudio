@@ -1,4 +1,4 @@
-package initialization;
+package com.microsoft.projectoxford.emotionsample.initialization;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,20 +10,21 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class SongListDbHelper extends SQLiteOpenHelper {
     // If you change the database schema, you must increment the database version.
-    public static final int DATABASE_VERSION = 1;
-    public static final String DATABASE_NAME = "FeedReader.db";
+    public static final int DATABASE_VERSION = 3;
+    public static final String DATABASE_NAME = "SongLists.db";
 
 
 
     //Predefined statements
+    private static final String PRIMARY_KEY = "  PRIMARY KEY";
     private static final String TEXT_TYPE = " TEXT";
     private static final String COMMA_SEP = ",";
     private static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + SongListContract.FeedEntry.TABLE_NAME + " (" +
-                    SongListContract.FeedEntry._ID + " INTEGER PRIMARY KEY," +
+                    SongListContract.FeedEntry._ID + COMMA_SEP +//" INTEGER PRIMARY KEY" +
                     SongListContract.FeedEntry.COLUMN_NAME_TITLE + TEXT_TYPE + COMMA_SEP +
                     SongListContract.FeedEntry.COLUMN_NAME_ARTIST + TEXT_TYPE + COMMA_SEP +
-                    SongListContract.FeedEntry.COLUMN_NAME_PATH + TEXT_TYPE + COMMA_SEP +
+                    SongListContract.FeedEntry.COLUMN_NAME_PATH + TEXT_TYPE + PRIMARY_KEY + COMMA_SEP +
                     SongListContract.FeedEntry.COLUMN_NAME_CATEGORY + TEXT_TYPE + " )";
 
     private static final String SQL_DELETE_ENTRIES =

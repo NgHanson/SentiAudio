@@ -33,7 +33,9 @@
 package com.microsoft.projectoxford.emotionsample;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.hardware.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -41,14 +43,21 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.microsoft.projectoxford.emotion.EmotionServiceClient;
@@ -63,13 +72,15 @@ import com.microsoft.projectoxford.face.contract.Face;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
-public class RecognizeActivity extends ActionBarActivity {
-
-    // Flag to indicate which task is to be performed.
-    private static final int REQUEST_SELECT_IMAGE = 0;
+public class RecognizeActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     // The button to select an image
     private Button mButtonSelectImage;
@@ -80,10 +91,18 @@ public class RecognizeActivity extends ActionBarActivity {
     // The image selected to detect.
     private Bitmap mBitmap;
 
-    // The edit to show status and result.
-    private EditText mEditText;
-
     private EmotionServiceClient client;
+
+    private int currentCameraId = 1;
+
+    //TEST
+    Camera camera;
+    SurfaceView surfaceView;
+    SurfaceHolder surfaceHolder;
+    Camera.PictureCallback jpegCallback;
+    Camera.ShutterCallback shutterCallback;
+    Camera.PictureCallback rawCallback;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,7 +114,150 @@ public class RecognizeActivity extends ActionBarActivity {
         }
 
         mButtonSelectImage = (Button) findViewById(R.id.buttonSelectImage);
-        mEditText = (EditText) findViewById(R.id.editTextResult);
+        mButtonSelectImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                try {
+                    captureImage(v);
+                }catch (Exception e){
+
+                }
+            }
+        });
+
+        //NEW
+        surfaceView = (SurfaceView) findViewById(R.id.surface_view);
+        surfaceHolder = surfaceView.getHolder();
+        surfaceHolder.addCallback(this);
+        surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+        camera = Camera.open(currentCameraId);
+        camera.setDisplayOrientation(90); //CAREFUL for rotation in IMAGE HELPER
+        int rotation = this.getWindowManager().getDefaultDisplay().getRotation();
+        Log.e("Rotation", String.valueOf(rotation));
+
+        jpegCallback = new Camera.PictureCallback() {
+
+            @Override
+            public void onPictureTaken(byte[] data, Camera camera) {
+
+                File pictureFile = getOutputMediaFile();
+                if (pictureFile == null) {
+                    return;
+                }
+
+                FileOutputStream outStream = null;
+                try {
+
+                    outStream = new FileOutputStream(pictureFile);
+                    outStream.write(data);
+                    outStream.close();
+
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } finally {
+                }
+
+                mImageUri = Uri.fromFile(pictureFile);
+                mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(
+                        mImageUri, getContentResolver());
+
+                if (mBitmap != null) {
+                    doRecognize();
+                }
+
+                Toast.makeText(getApplicationContext(), "Picture Saved", Toast.LENGTH_LONG).show();
+                refreshCamera();
+            }
+
+            private File getOutputMediaFile() {
+                File mediaStorageDir = new File(
+                        Environment
+                                .getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES),
+                        "MyCameraApp");
+                if (!mediaStorageDir.exists()) {
+                    if (!mediaStorageDir.mkdirs()) {
+                        Log.d("MyCameraApp", "failed to create directory");
+                        return null;
+                    }
+                }
+                // Create a media file name
+                String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss")
+                        .format(new Date());
+                File mediaFile;
+                mediaFile = new File(mediaStorageDir.getPath() + File.separator
+                        + "IMG_" + timeStamp + ".jpg");
+
+                return mediaFile;
+            }
+        };
+    }
+
+
+
+    public void captureImage(View v) throws IOException {
+        camera.takePicture(null, null, jpegCallback);
+
+    }
+
+    public void refreshCamera() {
+        if (surfaceHolder.getSurface() == null) {
+            return;
+        }
+
+        try {
+            camera.stopPreview();
+        } catch (Exception e) {
+        }
+
+        try {
+            camera.setPreviewDisplay(surfaceHolder);
+            camera.startPreview();
+        } catch (Exception e) {
+        }
+    }
+
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        try {
+            camera = Camera.open();
+        } catch (RuntimeException e) {
+            System.err.println(e);
+            return;
+        }
+
+        Camera.Parameters param;
+        param = camera.getParameters();
+
+        // modify parameter
+        List<Camera.Size> sizes = param.getSupportedPreviewSizes();
+        Camera.Size selected = sizes.get(0);
+        param.setPreviewSize(selected.width,selected.height);
+        camera.setParameters(param);
+
+
+        try {
+            camera.setPreviewDisplay(surfaceHolder);
+            camera.startPreview();
+        } catch (Exception e) {
+            System.err.println(e);
+            return;
+        }
+    }
+
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
+        refreshCamera();
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        camera.stopPreview();
+        camera.release();
+        camera = null;
     }
 
     @Override
@@ -126,59 +288,21 @@ public class RecognizeActivity extends ActionBarActivity {
         // Do emotion detection using auto-detected faces.
         try {
             new doRequest(false).execute();
+            new doRequest(false).execute();
         } catch (Exception e) {
-            mEditText.append("Error encountered. Exception is: " + e.toString());
+            Log.e("Error Exception: ", e.toString());
         }
 
         String faceSubscriptionKey = getString(R.string.faceSubscription_key);
         if (faceSubscriptionKey.equalsIgnoreCase("Please_add_the_face_subscription_key_here")) {
-            mEditText.append("\n\nThere is no face subscription key in res/values/strings.xml. Skip the sample for detecting emotions using face rectangles\n");
-        } else {
+            Log.e("Fix: ", "There is no face subscription key in res/values/strings.xml.");
+        }else {
             // Do emotion detection using face rectangles provided by Face API.
             try {
                 new doRequest(true).execute();
             } catch (Exception e) {
-                mEditText.append("Error encountered. Exception is: " + e.toString());
+                Log.e("Error Exception: ", e.toString());
             }
-        }
-    }
-
-    // Called when the "Select Image" button is clicked.
-    public void selectImage(View view) {
-        mEditText.setText("");
-
-        Intent intent;
-        intent = new Intent(RecognizeActivity.this, com.microsoft.projectoxford.emotionsample.helper.SelectImageActivity.class);
-        startActivityForResult(intent, REQUEST_SELECT_IMAGE);
-    }
-
-    // Called when image selection is done.
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d("RecognizeActivity", "onActivityResult");
-        switch (requestCode) {
-            case REQUEST_SELECT_IMAGE:
-                if (resultCode == RESULT_OK) {
-                    // If image is selected successfully, set the image URI and bitmap.
-                    mImageUri = data.getData();
-
-                    mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(
-                            mImageUri, getContentResolver());
-                    if (mBitmap != null) {
-                        // Show the image on screen.
-                        ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                        imageView.setImageBitmap(mBitmap);
-
-                        // Add detection log.
-                        Log.d("RecognizeActivity", "Image: " + mImageUri + " resized to " + mBitmap.getWidth()
-                                + "x" + mBitmap.getHeight());
-
-                        doRecognize();
-                    }
-                }
-                break;
-            default:
-                break;
         }
     }
 
@@ -295,16 +419,16 @@ public class RecognizeActivity extends ActionBarActivity {
             // Display based on error existence
 
             if (this.useFaceRectangles == false) {
-                mEditText.append("\n\nRecognizing emotions with auto-detected face rectangles...\n");
+                Log.e("Doing: ","Recognizing emotions with auto-detected face rectangles...");
             } else {
-                mEditText.append("\n\nRecognizing emotions with existing face rectangles from Face API...\n");
+                Log.e("Doing: ", "Recognizing emotions with existing face rectangles from Face API...");
             }
             if (e != null) {
-                mEditText.setText("Error: " + e.getMessage());
+                Log.e("Error Exception: ", e.toString());
                 this.e = null;
             } else {
                 if (result.size() == 0) {
-                    mEditText.append("No emotion detected :(");
+                    Log.e("L","No emotion detected :(");
                 } else {
                     Integer count = 0;
                     // Covert bitmap to a mutable bitmap by copying it
@@ -315,29 +439,31 @@ public class RecognizeActivity extends ActionBarActivity {
                     paint.setStyle(Paint.Style.STROKE);
                     paint.setStrokeWidth(5);
                     paint.setColor(Color.RED);
-
                     for (RecognizeResult r : result) {
-                        mEditText.append(String.format("\nFace #%1$d \n", count));
-                        mEditText.append(String.format("\t anger: %1$.5f\n", r.scores.anger));
-                        mEditText.append(String.format("\t contempt: %1$.5f\n", r.scores.contempt));
-                        mEditText.append(String.format("\t disgust: %1$.5f\n", r.scores.disgust));
-                        mEditText.append(String.format("\t fear: %1$.5f\n", r.scores.fear));
-                        mEditText.append(String.format("\t happiness: %1$.5f\n", r.scores.happiness));
-                        mEditText.append(String.format("\t neutral: %1$.5f\n", r.scores.neutral));
-                        mEditText.append(String.format("\t sadness: %1$.5f\n", r.scores.sadness));
-                        mEditText.append(String.format("\t surprise: %1$.5f\n", r.scores.surprise));
-                        mEditText.append(String.format("\t face rectangle: %d, %d, %d, %d", r.faceRectangle.left, r.faceRectangle.top, r.faceRectangle.width, r.faceRectangle.height));
                         faceCanvas.drawRect(r.faceRectangle.left,
                                 r.faceRectangle.top,
                                 r.faceRectangle.left + r.faceRectangle.width,
                                 r.faceRectangle.top + r.faceRectangle.height,
                                 paint);
-                        count++;
                     }
-                    ImageView imageView = (ImageView) findViewById(R.id.selectedImage);
-                    imageView.setImageDrawable(new BitmapDrawable(getResources(), mBitmap));
+
+                    int c = 0;
+                    for (RecognizeResult r : result){
+                        Log.e("Face Count", String.valueOf(c));
+                        Log.e("Anger", String.valueOf(r.scores.anger * 100));
+                        Log.e("Contempt", String.valueOf(r.scores.contempt * 100));
+                        Log.e("Disgust", String.valueOf(r.scores.disgust * 100));
+                        Log.e("Fear", String.valueOf(r.scores.fear * 100));
+                        Log.e("Happiness", String.valueOf(r.scores.happiness * 100));
+                        Log.e("Neutral", String.valueOf(r.scores.neutral * 100));
+                        Log.e("Sadness", String.valueOf(r.scores.sadness * 100));
+                        Log.e("Surprise", String.valueOf(r.scores.surprise * 100));
+                        Log.e("Face rectangle: ", String.valueOf(r.faceRectangle.left) + " " + String.valueOf(r.faceRectangle.top) + " " + String.valueOf(r.faceRectangle.width) + " " + String.valueOf(r.faceRectangle.height));
+                        Log.e(" ", " ");
+                        c++;
+                    }
+
                 }
-                mEditText.setSelection(0);
             }
 
             mButtonSelectImage.setEnabled(true);
