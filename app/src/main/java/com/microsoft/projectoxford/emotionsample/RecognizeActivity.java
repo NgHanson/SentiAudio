@@ -82,10 +82,6 @@ import java.util.List;
 
 public class RecognizeActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
-    // Flag to indicate which task is to be performed.
-    private static final int REQUEST_SELECT_IMAGE = 0;
-    final private int REQUEST_IMAGE_CAPTURE = 1;
-
     // The button to select an image
     private Button mButtonSelectImage;
 
@@ -96,6 +92,8 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
     private Bitmap mBitmap;
 
     private EmotionServiceClient client;
+
+    private int currentCameraId = 1;
 
     //TEST
     Camera camera;
@@ -132,6 +130,11 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         surfaceHolder = surfaceView.getHolder();
         surfaceHolder.addCallback(this);
         surfaceHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS);
+
+        camera = Camera.open(currentCameraId);
+        camera.setDisplayOrientation(90); //CAREFUL for rotation in IMAGE HELPER
+        int rotation = this.getWindowManager().getDefaultDisplay().getRotation();
+        Log.e("Rotation", String.valueOf(rotation));
 
         jpegCallback = new Camera.PictureCallback() {
 
@@ -235,18 +238,6 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         param.setPreviewSize(selected.width,selected.height);
         camera.setParameters(param);
 
-
-        // make any resize, rotate or reformatting changes here
-        if (this.getResources().getConfiguration().orientation != Configuration.ORIENTATION_LANDSCAPE) {
-
-            camera.setDisplayOrientation(90);
-            //CAREFUL HERE, REMEMBER TO ROTATE BACK IN ImageHelper.java
-
-        } else {
-
-            camera.setDisplayOrientation(0);
-
-        }
 
         try {
             camera.setPreviewDisplay(surfaceHolder);
@@ -459,21 +450,20 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
                     int c = 0;
                     for (RecognizeResult r : result){
                         Log.e("Face Count", String.valueOf(c));
-                        Log.e("Anger", String.valueOf(r.scores.anger));
-                        Log.e("Contempt", String.valueOf(r.scores.contempt));
-                        Log.e("Disgust", String.valueOf(r.scores.disgust));
-                        Log.e("Fear", String.valueOf(r.scores.fear));
-                        Log.e("Happiness", String.valueOf(r.scores.happiness));
-                        Log.e("Neutral", String.valueOf(r.scores.neutral));
-                        Log.e("Sadness", String.valueOf(r.scores.sadness));
-                        Log.e("Surprise", String.valueOf(r.scores.surprise));
+                        Log.e("Anger", String.valueOf(r.scores.anger * 100));
+                        Log.e("Contempt", String.valueOf(r.scores.contempt * 100));
+                        Log.e("Disgust", String.valueOf(r.scores.disgust * 100));
+                        Log.e("Fear", String.valueOf(r.scores.fear * 100));
+                        Log.e("Happiness", String.valueOf(r.scores.happiness * 100));
+                        Log.e("Neutral", String.valueOf(r.scores.neutral * 100));
+                        Log.e("Sadness", String.valueOf(r.scores.sadness * 100));
+                        Log.e("Surprise", String.valueOf(r.scores.surprise * 100));
                         Log.e("Face rectangle: ", String.valueOf(r.faceRectangle.left) + " " + String.valueOf(r.faceRectangle.top) + " " + String.valueOf(r.faceRectangle.width) + " " + String.valueOf(r.faceRectangle.height));
                         Log.e(" ", " ");
                         c++;
                     }
 
                 }
-                //mEditText.setSelection(0);
             }
 
             mButtonSelectImage.setEnabled(true);

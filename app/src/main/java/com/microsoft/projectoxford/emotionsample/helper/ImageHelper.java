@@ -159,7 +159,7 @@ public class ImageHelper {
         // If the rotate angle is 0, then return the original image, else return the rotated image
         Log.e("Angle", String.valueOf(angle));
         Matrix matrix = new Matrix();
-        matrix.postRotate(90);
+        matrix.postRotate(-90);
         return Bitmap.createBitmap(
                 bitmap, 0, 0, bitmap.getWidth(), bitmap.getHeight(), matrix, true);
 
