@@ -5,31 +5,19 @@
 
     tools:context="com.microsoft.projectoxford.emotionsample.RecognizeActivity">
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:orientation="vertical"
-        android:weightSum="1">
 
         <SurfaceView
             android:id="@+id/surface_view"
             android:layout_width="match_parent"
-            android:layout_height="440dp" />
+            android:layout_height="520dp" />
 
         <Button
             android:id="@+id/buttonSelectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Select Image" />
+            android:layout_centerHorizontal="true"
+            android:layout_below="@id/surface_view"
+            android:background="@drawable/round_button" />
 
-
-        <EditText
-            android:id="@+id/editTextResult"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:inputType="textMultiLine" />
-
-    </LinearLayout>
 
 </RelativeLayout>

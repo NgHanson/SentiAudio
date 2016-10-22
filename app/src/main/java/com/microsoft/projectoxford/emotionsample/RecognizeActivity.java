@@ -45,6 +45,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -54,6 +56,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -77,7 +80,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-public class RecognizeActivity extends ActionBarActivity implements SurfaceHolder.Callback {
+public class RecognizeActivity extends AppCompatActivity implements SurfaceHolder.Callback {
 
     // Flag to indicate which task is to be performed.
     private static final int REQUEST_SELECT_IMAGE = 0;
@@ -91,9 +94,6 @@ public class RecognizeActivity extends ActionBarActivity implements SurfaceHolde
 
     // The image selected to detect.
     private Bitmap mBitmap;
-
-    // The edit to show status and result.
-    private EditText mEditText;
 
     private EmotionServiceClient client;
 
@@ -126,7 +126,6 @@ public class RecognizeActivity extends ActionBarActivity implements SurfaceHolde
                 }
             }
         });
-        mEditText = (EditText) findViewById(R.id.editTextResult);
 
         //NEW
         surfaceView = (SurfaceView) findViewById(R.id.surface_view);
@@ -300,18 +299,18 @@ public class RecognizeActivity extends ActionBarActivity implements SurfaceHolde
             new doRequest(false).execute();
             new doRequest(false).execute();
         } catch (Exception e) {
-            mEditText.append("Error encountered. Exception is: " + e.toString());
+            Log.e("Error Exception: ", e.toString());
         }
 
         String faceSubscriptionKey = getString(R.string.faceSubscription_key);
         if (faceSubscriptionKey.equalsIgnoreCase("Please_add_the_face_subscription_key_here")) {
-            mEditText.append("\n\nThere is no face subscription key in res/values/strings.xml. Skip the sample for detecting emotions using face rectangles\n");
-        } else {
+            Log.e("Fix: ", "There is no face subscription key in res/values/strings.xml.");
+        }else {
             // Do emotion detection using face rectangles provided by Face API.
             try {
                 new doRequest(true).execute();
             } catch (Exception e) {
-                mEditText.append("Error encountered. Exception is: " + e.toString());
+                Log.e("Error Exception: ", e.toString());
             }
         }
     }
@@ -429,17 +428,15 @@ public class RecognizeActivity extends ActionBarActivity implements SurfaceHolde
             // Display based on error existence
 
             if (this.useFaceRectangles == false) {
-                mEditText.append("\n\nRecognizing emotions with auto-detected face rectangles...\n");
-                Log.e("L","\n\nRecognizing emotions with auto-detected face rectangles...\n");
+                Log.e("Doing: ","Recognizing emotions with auto-detected face rectangles...");
             } else {
-                mEditText.append("\n\nRecognizing emotions with existing face rectangles from Face API...\n");
+                Log.e("Doing: ", "Recognizing emotions with existing face rectangles from Face API...");
             }
             if (e != null) {
-                mEditText.setText("Error: " + e.getMessage());
+                Log.e("Error Exception: ", e.toString());
                 this.e = null;
             } else {
                 if (result.size() == 0) {
-                    mEditText.append("No emotion detected :(");
                     Log.e("L","No emotion detected :(");
                 } else {
                     Integer count = 0;
@@ -451,25 +448,12 @@ public class RecognizeActivity extends ActionBarActivity implements SurfaceHolde
                     paint.setStyle(Paint.Style.STROKE);
                     paint.setStrokeWidth(5);
                     paint.setColor(Color.RED);
-
-
                     for (RecognizeResult r : result) {
-                        mEditText.append(String.format("\nFace #%1$d \n", count));
-                        mEditText.append(String.format("\t anger: %1$.5f\n", r.scores.anger));
-                        mEditText.append(String.format("\t contempt: %1$.5f\n", r.scores.contempt));
-                        mEditText.append(String.format("\t disgust: %1$.5f\n", r.scores.disgust));
-                        mEditText.append(String.format("\t fear: %1$.5f\n", r.scores.fear));
-                        mEditText.append(String.format("\t happiness: %1$.5f\n", r.scores.happiness));
-                        mEditText.append(String.format("\t neutral: %1$.5f\n", r.scores.neutral));
-                        mEditText.append(String.format("\t sadness: %1$.5f\n", r.scores.sadness));
-                        mEditText.append(String.format("\t surprise: %1$.5f\n", r.scores.surprise));
-                        mEditText.append(String.format("\t face rectangle: %d, %d, %d, %d", r.faceRectangle.left, r.faceRectangle.top, r.faceRectangle.width, r.faceRectangle.height));
                         faceCanvas.drawRect(r.faceRectangle.left,
                                 r.faceRectangle.top,
                                 r.faceRectangle.left + r.faceRectangle.width,
                                 r.faceRectangle.top + r.faceRectangle.height,
                                 paint);
-                        count++;
                     }
 
                     int c = 0;
@@ -489,7 +473,7 @@ public class RecognizeActivity extends ActionBarActivity implements SurfaceHolde
                     }
 
                 }
-                mEditText.setSelection(0);
+                //mEditText.setSelection(0);
             }
 
             mButtonSelectImage.setEnabled(true);

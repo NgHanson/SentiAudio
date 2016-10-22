@@ -2,13 +2,76 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
-        jumboMode="true"
+        is-multidex="false"
+        jar="/Users/hansonng/Desktop/Sample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="false"
         optimize="true"
         revision="21.1.2"
-        sha1="4000608360494fd5bfd78167ef7e2698786ca19b">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5378eeb8bcd2263fb967623ceee64d4774db8204\classes.dex" />
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-22.2.1_a3f842387113b8f009c81cbab1ef7af9fc81cf8f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/Desktop/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/libs/commons-io-2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/commons-io-2.4_eddcab9a96499cc8fdb2686f0a306e16c424b6dc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1_035b3e543c1b2bbb7c3027a2e776defdfe67418d.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/Desktop/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_0bad06892cb181536b4134c5f537e8daa3c12536.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/Desktop/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/face/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-face-1.0.0_475bcdea50d1b3f73160dec1c0764e260cacf6f7.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/Desktop/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-emotion-1.0.0_7d22bd2070d0070790d26e69609bbaa920640746.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/Desktop/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-22.2.1_ccd35a34b0f43fd9f0c713c5c881c4d0f270815f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/hansonng/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.5/686c608d1805b6d4d425ec4459e88164ffc85870/gson-2.5.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="21.1.2"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="/Users/hansonng/Desktop/Sample/app/build/intermediates/pre-dexed/debug/gson-2.5_4a68c542d03955b7bdae6e4f8e8d7d5c4efbc87d.jar" />
     </item>
 
 </items>
