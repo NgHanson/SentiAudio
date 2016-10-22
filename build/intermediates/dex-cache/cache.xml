@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/libs/commons-io-2.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/commons-io-2.4_f73500b40e958b6d3fb401d448c1a195968a2d07.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3_66e8e423b7980c4a4f86cbf76d694c25893c3b56.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/face/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-face-1.0.0_c0b9e732c6ed5ce41d8896354dfdce77689fcae4.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-21.0.3_d323cc675f24fe67f37f0e7746d482cd79ca2d2c.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3_4b0aac641d4b8acec2d0ca9c4f8dd9601d42edfd.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-21.0.3_1a7b817b9a85e549cc35486a21bd23c1133c0ab1.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-emotion-1.0.0_080950cc7f7a7c26e4656eca682fccdcce959b89.jar" />
+    </item>
+    <item
+        jar="/Users/hansonng/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.5/686c608d1805b6d4d425ec4459e88164ffc85870/gson-2.5.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="/Users/hansonng/Desktop/Cognitive-Emotion-Android-master/Sample/app/build/intermediates/pre-dexed/debug/gson-2.5_4a68c542d03955b7bdae6e4f8e8d7d5c4efbc87d.jar" />
+    </item>
+
+</items>
