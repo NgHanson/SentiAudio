@@ -57,6 +57,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Html;
 import android.text.method.MovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.os.HandlerThread;
@@ -135,9 +136,6 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
     private Bitmap mPauseImg;
 
     private String mEmotion = "Happy";
-
-    private ProgressBar mProgressBar;
-
     // The button to select an image
     private Button mButtonSelectImage;
 
@@ -183,7 +181,6 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
         mPlayPause = (ImageButton)findViewById(R.id.play_pause);
         mForward = (ImageButton)findViewById(R.id.forward);
         mPrevious = (ImageButton)findViewById(R.id.previous);
-        mProgressBar = (ProgressBar)findViewById(R.id.progressSpinner);
         mPauseImg = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_pause);
         mPlayImg = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_play);
 
@@ -212,9 +209,6 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
 
 
 
-        mProgressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.black),
-                android.graphics.PorterDuff.Mode.MULTIPLY);
-
         //Other Code
         if (client == null) {
             client = new EmotionServiceRestClient(getString(R.string.subscription_key));
@@ -229,6 +223,7 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
             @Override
             public void onClick(View v) {
                 try {
+                    mTitleText.setText(R.string.loading_library);
                     takePicture();
                 } catch (Exception e) {
 
@@ -294,7 +289,7 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
         @Override
         public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
             super.onCaptureCompleted(session, request, result);
-            Toast.makeText(RecognizeActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(RecognizeActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
             createCameraPreview();
         }
     };
@@ -398,7 +393,7 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
                 @Override
                 public void onCaptureCompleted(CameraCaptureSession session, CaptureRequest request, TotalCaptureResult result) {
                     super.onCaptureCompleted(session, request, result);
-                    Toast.makeText(RecognizeActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(RecognizeActivity.this, "Saved:" + file, Toast.LENGTH_SHORT).show();
                     createCameraPreview();
                 }
             };
@@ -664,7 +659,7 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
             }
 
             mButtonSelectImage.setEnabled(true);
-
+            //TODO: Set list and make taost text
             /**
              * Start the music playing here
              */
@@ -694,7 +689,8 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
 
                 @Override
                 public void sendPlayerInfo(String title, String artist) {
-                    mTitleText.setText(mEmotion+":    " + title);
+                    String input_text = "<b>" + mEmotion+ "</b>"+":    " + title;
+                    mTitleText.setText(Html.fromHtml(input_text));
 
                 }
                 @Override

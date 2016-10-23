@@ -27,6 +27,7 @@
     <string name="select_image_in_album">From Gallery</string>
     <!-- player strings -->
     <string name="empty_title">No Input, Take a Picture to Start</string>
+    <string name="loading_library">Loading Library</string>
     <string name="play_pause">Play/Pause</string>
     <string name="forward">Forward</string>
     <string name="previous">Previous</string>

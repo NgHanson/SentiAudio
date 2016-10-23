@@ -7,7 +7,7 @@
   </component>
   <component name="AndroidLogFilters">
     <option name="TOOL_WINDOW_LOG_LEVEL" value="error" />
-    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
+    <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="No Filters" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fa207bdd-866a-4310-9e10-7c64a2ee6a33" name="Default" comment="" />
@@ -45,8 +45,8 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="88" selection-end-column="59" />
+            <state relative-caret-position="323">
+              <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="88" selection-end-column="59" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -57,18 +57,29 @@
       <file leaf-file-name="RecognizeActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/RecognizeActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="185" column="71" selection-start-line="185" selection-start-column="71" selection-end-line="185" selection-end-column="71" />
+            <state relative-caret-position="119">
+              <caret line="599" column="5" selection-start-line="599" selection-start-column="5" selection-end-line="599" selection-end-column="5" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#8308#8540#0" expanded="true" />
-                <element signature="e#8539#8540#0" expanded="true" />
-                <element signature="e#10612#11007#0" expanded="true" />
-                <element signature="e#11006#11007#0" expanded="true" />
-                <element signature="e#12522#12531#0" expanded="true" />
-                <element signature="e#15093#15544#0" expanded="true" />
-                <element signature="e#15543#15544#0" expanded="true" />
+                <element signature="e#8058#8356#0" expanded="true" />
+                <element signature="e#8212#8236#0" expanded="true" />
+                <element signature="e#8355#8356#0" expanded="true" />
+                <element signature="e#10428#10825#0" expanded="true" />
+                <element signature="e#10824#10825#0" expanded="true" />
+                <element signature="e#12340#12349#0" expanded="true" />
+                <element signature="e#14911#15364#0" expanded="true" />
+                <element signature="e#15363#15364#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="strings.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="29" column="33" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="33" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,8 +116,8 @@
             <state />
           </provider>
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="92" column="44" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="44" />
+            <state relative-caret-position="344">
+              <caret line="90" column="58" selection-start-line="90" selection-start-column="58" selection-end-line="90" selection-end-column="58" />
               <folding />
             </state>
           </provider>
@@ -1747,7 +1758,9 @@
         <option value="$PROJECT_DIR$/app/build.gradle" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/helper/ImageHelper.java" />
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_recognize.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/RecognizeActivity.java" />
       </list>
     </option>
@@ -2277,7 +2290,7 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.86755955" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19791667" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32738096" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2352,13 +2365,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8308#8540#0" expanded="true" />
-            <element signature="e#8539#8540#0" expanded="true" />
-            <element signature="e#10612#11007#0" expanded="true" />
-            <element signature="e#11006#11007#0" expanded="true" />
-            <element signature="e#12522#12531#0" expanded="true" />
-            <element signature="e#15093#15544#0" expanded="true" />
-            <element signature="e#15543#15544#0" expanded="true" />
+            <element signature="e#8058#8356#0" expanded="true" />
+            <element signature="e#8212#8236#0" expanded="true" />
+            <element signature="e#8355#8356#0" expanded="true" />
+            <element signature="e#10428#10825#0" expanded="true" />
+            <element signature="e#10824#10825#0" expanded="true" />
+            <element signature="e#12340#12349#0" expanded="true" />
+            <element signature="e#14911#15364#0" expanded="true" />
+            <element signature="e#15363#15364#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2388,13 +2402,14 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8308#8540#0" expanded="true" />
-            <element signature="e#8539#8540#0" expanded="true" />
-            <element signature="e#10612#11007#0" expanded="true" />
-            <element signature="e#11006#11007#0" expanded="true" />
-            <element signature="e#12522#12531#0" expanded="true" />
-            <element signature="e#15093#15544#0" expanded="true" />
-            <element signature="e#15543#15544#0" expanded="true" />
+            <element signature="e#8058#8356#0" expanded="true" />
+            <element signature="e#8212#8236#0" expanded="true" />
+            <element signature="e#8355#8356#0" expanded="true" />
+            <element signature="e#10428#10825#0" expanded="true" />
+            <element signature="e#10824#10825#0" expanded="true" />
+            <element signature="e#12340#12349#0" expanded="true" />
+            <element signature="e#14911#15364#0" expanded="true" />
+            <element signature="e#15363#15364#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2528,6 +2543,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_recognize.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="344">
+          <caret line="90" column="58" selection-start-line="90" selection-start-column="58" selection-end-line="90" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
       <provider editor-type-id="android-designer2">
         <state />
@@ -2539,40 +2565,38 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="356">
+          <caret line="29" column="33" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="85" column="41" selection-start-line="85" selection-start-column="41" selection-end-line="88" selection-end-column="59" />
+        <state relative-caret-position="323">
+          <caret line="86" column="0" selection-start-line="86" selection-start-column="0" selection-end-line="88" selection-end-column="59" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_recognize.xml">
-      <provider editor-type-id="android-designer2">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="92" column="44" selection-start-line="92" selection-start-column="29" selection-end-line="92" selection-end-column="44" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/microsoft/projectoxford/emotionsample/RecognizeActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="185" column="71" selection-start-line="185" selection-start-column="71" selection-end-line="185" selection-end-column="71" />
+        <state relative-caret-position="119">
+          <caret line="599" column="5" selection-start-line="599" selection-start-column="5" selection-end-line="599" selection-end-column="5" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#8308#8540#0" expanded="true" />
-            <element signature="e#8539#8540#0" expanded="true" />
-            <element signature="e#10612#11007#0" expanded="true" />
-            <element signature="e#11006#11007#0" expanded="true" />
-            <element signature="e#12522#12531#0" expanded="true" />
-            <element signature="e#15093#15544#0" expanded="true" />
-            <element signature="e#15543#15544#0" expanded="true" />
+            <element signature="e#8058#8356#0" expanded="true" />
+            <element signature="e#8212#8236#0" expanded="true" />
+            <element signature="e#8355#8356#0" expanded="true" />
+            <element signature="e#10428#10825#0" expanded="true" />
+            <element signature="e#10824#10825#0" expanded="true" />
+            <element signature="e#12340#12349#0" expanded="true" />
+            <element signature="e#14911#15364#0" expanded="true" />
+            <element signature="e#15363#15364#0" expanded="true" />
           </folding>
         </state>
       </provider>
