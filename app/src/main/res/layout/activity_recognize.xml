@@ -6,16 +6,17 @@
     tools:context="com.microsoft.projectoxford.emotionsample.RecognizeActivity">
 
 
-        <SurfaceView
-            android:id="@+id/surface_view"
+        <TextureView
+            android:id="@+id/texture"
             android:layout_width="match_parent"
-            android:layout_height="500dp" />
+
+            android:layout_height="480dp" />
 
         <RelativeLayout
             android:id="@+id/bottom_player"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/surface_view">
+            android:layout_below="@id/texture">
                 <TextView
                     android:id="@+id/title_text"
                     android:paddingStart="40dp"
@@ -88,6 +89,14 @@
             android:layout_centerHorizontal="true"
             android:layout_above="@id/bottom_player"
             android:background="@drawable/round_button" />
+        <ProgressBar
+            android:id="@+id/progressSpinner"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginBottom="30dp"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/bottom_player" />
+
 
 
 

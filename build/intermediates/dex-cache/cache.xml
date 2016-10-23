@@ -2,94 +2,94 @@
 <items version="2" >
 
     <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\emotion\1.0.0\jars\libs\commons-io-2.4.jar"
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\commons-io-2.4_da18540cd95871b1335c5b9f6d85b6824efa6d28.jar" />
+        sha1="551e92e951d8880b9bd0357e3157dedcfbbdd4fb">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5378eeb8bcd2263fb967623ceee64d4774db8204\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\23.0.1\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="cc2b3981fc031ed6409b251125022e2fcf72b4ed">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\instant-run_bc46ee70ef7efaef180f5c14c4acad9630d4d9d0.jar" />
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-appcompat-v7-23.0.1_00c4662bc37e890ad9759eb1e91cba98a7ee6646\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\christophE\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\22.2.1\support-annotations-22.2.1.jar"
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\libs\internal_impl-23.0.1.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\support-annotations-22.2.1_1a6c2b555619c4450fb19247749450c63cfb6d19.jar" />
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\internal_impl-23.0.1_8142d092780b25e0a412bde0747740cf9bfdc702\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\appcompat-v7\22.2.1\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\com.android.support-appcompat-v7-22.2.1_91d28ac7ec7129891bc50220aafde53b5d3f922f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\libs\internal_impl-22.2.1.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\internal_impl-22.2.1_67a8cdbc3f5140a2675280c4d284a96b737e8bc7.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\face\1.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\com.microsoft.projectoxford-face-1.0.0_0de000131725f5469abba04afca85a249b3f7323.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\emotion\1.0.0\jars\classes.jar"
-        jumboMode="true"
-        optimize="true"
-        revision="21.1.2"
-        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\com.microsoft.projectoxford-emotion-1.0.0_15ec9241982bc057d5ad4a133d4e575e611f0f76.jar" />
-    </item>
-    <item
-        is-multidex="false"
+        is-multidex="true"
         jar="C:\Users\christophE\.gradle\caches\modules-2\files-2.1\com.google.code.gson\gson\2.5\686c608d1805b6d4d425ec4459e88164ffc85870\gson-2.5.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
         sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\gson-2.5_5a117d6e96e1bfcb38f8c87875f142d85419d228.jar" />
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.5_5a117d6e96e1bfcb38f8c87875f142d85419d228\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-classes\debug\instant-run-bootstrap.jar"
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\face\1.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="ef6e62661a78cae17b438868b176c074c7c9314f">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\instant-run-bootstrap_5378eeb8bcd2263fb967623ceee64d4774db8204.jar" />
+        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.microsoft.projectoxford-face-1.0.0_0de000131725f5469abba04afca85a249b3f7323\classes.dex" />
     </item>
     <item
-        is-multidex="false"
-        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\support-v4\22.2.1\jars\classes.jar"
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\emotion\1.0.0\jars\classes.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="f8efd0096475e0daf054267b61544e10dc776503">
-        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\pre-dexed\debug\com.android.support-support-v4-22.2.1_32ee3364bd36c8f8363d47e8c3fcf837be26602e.jar" />
+        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.microsoft.projectoxford-emotion-1.0.0_15ec9241982bc057d5ad4a133d4e575e611f0f76\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.android.support\support-v4\23.0.1\jars\classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\com.android.support-support-v4-23.0.1_2a0172908c72a8a2c74951f00f57a5c4d97523af\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\exploded-aar\com.microsoft.projectoxford\emotion\1.0.0\jars\libs\commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\commons-io-2.4_da18540cd95871b1335c5b9f6d85b6824efa6d28\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\AppData\Local\Android\sdk\extras\android\m2repository\com\android\support\support-annotations\23.0.1\support-annotations-23.0.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-23.0.1_ac960148a186848150c43ae99369d47f4325cba9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\incremental-runtime-classes\debug\instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b2b270be605b83ba8cd9c258345d09dfae1cefb1">
+        <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_bc46ee70ef7efaef180f5c14c4acad9630d4d9d0\classes.dex" />
     </item>
 
 </items>
