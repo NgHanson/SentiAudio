@@ -6,18 +6,20 @@
     tools:context="com.microsoft.projectoxford.emotionsample.RecognizeActivity">
 
 
-        <SurfaceView
-            android:id="@+id/surface_view"
+        <TextureView
+            android:id="@+id/texture"
             android:layout_width="match_parent"
-            android:layout_height="520dp" />
+            android:layout_height="480dp" />
 
         <Button
             android:id="@+id/buttonSelectImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_below="@id/surface_view"
+            android:layout_below="@id/texture"
             android:background="@drawable/round_button" />
+        
+
 
 
 

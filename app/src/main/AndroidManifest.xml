@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
+    <uses-feature android:name="android.hardware.camera2.full" />
 
     <application
         android:allowBackup="true"
@@ -42,10 +43,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.microsoft.projectoxford.emotionsample.MainActivity" />
         </activity>
-        <activity
-            android:name="com.microsoft.projectoxford.emotionsample.helper.SelectImageActivity"
-            android:label="Start"
-            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
