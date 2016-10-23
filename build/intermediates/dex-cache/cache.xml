@@ -2,13 +2,94 @@
 <items version="2" >
 
     <item
-        is-multidex="true"
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="4486e953d1f35f8ccab098b1dd67146366d5f731">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-22.2.1_591fa5100a8fdf7b61c768cf34f5fb0188e76845.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="f8efd0096475e0daf054267b61544e10dc776503">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-22.2.1_6ee4e56edd6689cf960c3e3cef0e7793f3277fbc.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.5/686c608d1805b6d4d425ec4459e88164ffc85870/gson-2.5.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="686c608d1805b6d4d425ec4459e88164ffc85870">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/gson-2.5_67449f08553d5e5651f42f79f0eab137b01a43f6.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/libs/commons-io-2.4.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b1b6ea3b7e4aa4f492509a4952029cd8e48019ad">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/commons-io-2.4_bfd82b51605983b9dfc8c620be9e9ab6d50ee7ae.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/face/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="b9885b9cbfc39129a13674d39d0cae321fc0dc97">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-face-1.0.0_4aa363716e8cf3b561404a22ea813e2ebfa5b67f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="e215eff601323762ba0bda01b236397146160ffe">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/instant-run_dd6c20a559a792012ba8e950da7ead4f19b0accd.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/exploded-aar/com.microsoft.projectoxford/emotion/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="85580f7e643f4e319878f282874afccc3b1b95ed">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/com.microsoft.projectoxford-emotion-1.0.0_1d4038868fb37c7963bbc5a891595c47517cae56.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/repos/SentiAudio/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.1/jars/libs/internal_impl-22.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="c471eaaba13ff64f6e0383d1c30a9cdc9a97efeb">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/internal_impl-22.2.1_7c042f0a48b299d4dd0f59b9731021240846843b.jar" />
+    </item>
+    <item
+        is-multidex="false"
         jar="/home/shabab/repos/SentiAudio/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="29b589ead601ec156ae829b563e0d3d2ccad1d30">
-        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_c3b10fe420fdf63a5ec03b33edf4ffc3d21e7684/classes.dex" />
+        sha1="8cb64222b690a6d58f3b7cb17a786c553baebfdc">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/instant-run-bootstrap_c3b10fe420fdf63a5ec03b33edf4ffc3d21e7684.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/home/shabab/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.1/support-annotations-22.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="21.1.2"
+        sha1="61a0ff5c29295ec56d7e0bd3d25d95dbf71b4b2b">
+        <dex dex="/home/shabab/repos/SentiAudio/app/build/intermediates/pre-dexed/debug/support-annotations-22.2.1_200f9694179e862bd63aba49a62def592bf9f544.jar" />
     </item>
 
 </items>
