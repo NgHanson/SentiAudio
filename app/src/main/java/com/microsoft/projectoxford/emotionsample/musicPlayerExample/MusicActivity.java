@@ -23,6 +23,7 @@ import java.util.List;
 import com.microsoft.projectoxford.emotionsample.initialization.MusicObject;
 import com.microsoft.projectoxford.emotionsample.initialization.SongListModel;
 import com.microsoft.projectoxford.emotionsample.musicPlayer.PlayerService;
+import com.microsoft.projectoxford.emotionsample.tarsos.HandleMachineLearn;
 
 import be.tarsos.dsp.AudioDispatcher;
 import be.tarsos.dsp.AudioEvent;
@@ -37,7 +38,7 @@ import be.tarsos.dsp.pitch.PitchProcessor;
  * Created by christophE on 2016-10-22.
  */
 
-public class MusicActivity extends AppCompatActivity{
+public class MusicActivity extends AppCompatActivity implements SongListModel.notifyMainClassListener {
     private PlayerService musicSrv;
     private Intent playIntent;
     private boolean musicBound=false;
@@ -48,7 +49,7 @@ public class MusicActivity extends AppCompatActivity{
     public void onCreate(Bundle savedInstances){
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_music);
-        mModel = new SongListModel(this);
+        mModel = new SongListModel(this,this);
 
         Button play = (Button)findViewById(R.id.play_song);
         /*play.setOnClickListener(new View.OnClickListener() {
@@ -64,37 +65,11 @@ public class MusicActivity extends AppCompatActivity{
         songList.clear();
         songList.addAll(mModel.getCategoryList(null));
         final MusicObject obj = songList.get(0);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                File externalStorage = Environment.getExternalStorageDirectory();
-                //File mp3 = new File(externalStorage.getAbsolutePath() , "/audio.mp3");
-                File mp3 =new File(obj.getData());
-                final AudioDispatcher adp;
-
-                adp = AudioDispatcherFactory.fromPipe(mp3.getAbsolutePath(),44100,1024,0);
-                PitchDetectionHandler pitchDetectionHandler = new PitchDetectionHandler() {
-                    @Override
-                    public void handlePitch(PitchDetectionResult pitchDetectionResult, AudioEvent audioEvent) {
-                        float pitch = pitchDetectionResult.getPitch();
-                        double i = audioEvent.getTimeStamp();
-                        double t2 = audioEvent.getEndTimeStamp();
-                        int t = 2;
-                        if(audioEvent.getTimeStamp()>=40){
-                            int j = t;
-                            int n = j;
-                            adp.stop();
-                        }
-                    }
-                };
-                adp.addAudioProcessor(new PitchProcessor(PitchProcessor.PitchEstimationAlgorithm.FFT_YIN,44100,1024,pitchDetectionHandler));
-                //adp.addAudioProcessor(new AndroidAudioPlayer(adp.getFormat(),5000, AudioManager.STREAM_MUSIC));
-
-                adp.run();
-            }
-        }).start();
+        //new Thread(new HandleMachineLearn(obj)).start();
     }
 
+    @Override
+    public void stopLoading(){}
     //connect to the service
     /*
     private ServiceConnection musicConnection = new ServiceConnection() {

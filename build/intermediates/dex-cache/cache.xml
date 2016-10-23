@@ -7,7 +7,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="74bb6b4d4f964dcec6f4c1810b157355a298eb21">
+        sha1="b0911148135d1d9949f46b332f878e486058927b">
         <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run-bootstrap_5378eeb8bcd2263fb967623ceee64d4774db8204\classes.dex" />
     </item>
     <item
@@ -70,7 +70,7 @@
         jumboMode="true"
         optimize="true"
         revision="21.1.2"
-        sha1="7cc9a8204c9cf535b614959601658ad61b07b2a7">
+        sha1="444480750141ea60543281fe6989d778f408d4fa">
         <dex dex="C:\Users\christophE\Documents\GitHub\SentiAudio\app\build\intermediates\transforms\dex\debug\folders\1000\10\instant-run_bc46ee70ef7efaef180f5c14c4acad9630d4d9d0\classes.dex" />
     </item>
     <item

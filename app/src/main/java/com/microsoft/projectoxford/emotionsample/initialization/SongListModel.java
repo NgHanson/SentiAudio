@@ -6,7 +6,13 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.provider.MediaStore;
+
+import com.microsoft.projectoxford.emotionsample.tarsos.HandleMachineLearn;
+import com.microsoft.projectoxford.emotionsample.thread.ProcessManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,12 +25,39 @@ import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 
 public class SongListModel {
 
+    private Handler mHandler;
     private SongListDbHelper mDbHelper;
     private Context mContext;
+    private ProcessManager mManager;
+    private int mTasksStarted = 0;
+    private int mTasksCompleted = 0;
+    private notifyMainClassListener mListener;
 
-    public SongListModel(Context context){
+
+    public interface notifyMainClassListener{
+        void stopLoading();
+    }
+
+
+    public SongListModel(Context context,notifyMainClassListener listener){
         mContext = context;
+        mListener = listener;
         mDbHelper = new SongListDbHelper(context);
+        mManager = new ProcessManager();
+        mHandler = new Handler(Looper.getMainLooper()) {
+            /*
+             * handleMessage() defines the operations to perform when
+             * the Handler receives a new Message to process.
+             */
+            @Override
+            public void handleMessage(Message inputMessage) {
+                mTasksCompleted++;
+                if(mTasksCompleted == mTasksStarted){
+                    //Notify UI;
+                    mListener.stopLoading();
+                }
+            }
+        };
 
     }
 
@@ -37,7 +70,6 @@ public class SongListModel {
         Cursor cur = cr.query(uri, null, selection, null, sortOrder);
         int count = 0;
 
-        SQLiteDatabase db = mDbHelper.getWritableDatabase();
 
         if(cur != null)
         {
@@ -54,20 +86,15 @@ public class SongListModel {
                         String artist = cur.getString(cur.getColumnIndex(MediaStore.Audio.Media.ARTIST));
 
 
-                        // Create a new map of values, where column names are the keys
-                        ContentValues values = new ContentValues();
-                        values.put(SongListContract.FeedEntry.COLUMN_NAME_TITLE, title);
-                        values.put(SongListContract.FeedEntry.COLUMN_NAME_ARTIST,artist);
-                        values.put(SongListContract.FeedEntry.COLUMN_NAME_PATH, data);
-                        values.put(SongListContract.FeedEntry.COLUMN_NAME_CATEGORY, "NONE");
+                        MusicObject obj = new MusicObject(title,data,artist,null);
 
-                        // Insert the new row, returning the primary key value of the new row
-                        long newRowId = db.insertWithOnConflict(SongListContract.FeedEntry.TABLE_NAME,null,values,CONFLICT_IGNORE);
+                        mManager.executeTask(new HandleMachineLearn(obj,mDbHelper,mHandler));
+                        mTasksStarted++;
+
                     }
                 }
             }
         }
-        db.close();
         cur.close();
     }
     public List<MusicObject> getCategoryList(String[] categorySelection){

@@ -115,7 +115,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHolder.Callback {
+public class RecognizeActivity extends AppCompatActivity implements SongListModel.notifyMainClassListener { //implements SurfaceHolder.Callback {
 
     /**
      * Music player
@@ -175,7 +175,7 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
         setContentView(R.layout.activity_recognize);
 
         //Music player code
-        mModel = new SongListModel(this);
+        mModel = new SongListModel(this,this);
         mTitleText = (TextView)findViewById(R.id.title_text);
         mSeekbar = (SeekBar)findViewById(R.id.seek_bar);
         mPlayPause = (ImageButton)findViewById(R.id.play_pause);
@@ -764,5 +764,6 @@ public class RecognizeActivity extends AppCompatActivity{ //implements SurfaceHo
         musicSrv=null;
         super.onDestroy();
     }
-
+    @Override
+    public void stopLoading(){}
 }

@@ -20,7 +20,7 @@ public class InitActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstances){
         super.onCreate(savedInstances);
         setContentView(R.layout.activity_init);
-        SongListModel mModel = new SongListModel(this);
+        //SongListModel mModel = new SongListModel(this,this);
         mModel.initializeSongList();
 
         Intent myIntent = new Intent(this, MusicActivity.class);

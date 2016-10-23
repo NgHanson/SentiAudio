@@ -50,9 +50,10 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 import com.microsoft.projectoxford.emotionsample.initialization.SongListModel;
+import com.microsoft.projectoxford.emotionsample.tarsos.AndroidFFMPEGLocator;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SongListModel.notifyMainClassListener {
     private TextView tv1;
     private Button mStartButton;
     private Button mInfoButton;
@@ -83,10 +84,11 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialize the database;
        // switchLoadingVisibility();
-        mModel = new SongListModel(this);
+        mModel = new SongListModel(this,this);
 
         mSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary),
                 android.graphics.PorterDuff.Mode.MULTIPLY);
+        new AndroidFFMPEGLocator(this);
         mModel.initializeSongList();
 
     }
@@ -118,6 +120,12 @@ public class MainActivity extends AppCompatActivity {
     public void activityRecognize(View v) {
         Intent intent = new Intent(this, RecognizeActivity.class);
         startActivity(intent);
+    }
+
+
+    @Override
+    public void stopLoading(){
+        switchLoadingVisibility();
     }
 
     @Override
