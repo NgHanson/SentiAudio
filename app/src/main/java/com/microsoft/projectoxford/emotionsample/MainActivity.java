@@ -43,13 +43,24 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.ImageView;
 
+import com.microsoft.projectoxford.emotionsample.initialization.SongListModel;
+
 
 public class MainActivity extends AppCompatActivity {
-    TextView tv1;
+    private TextView tv1;
+    private Button mStartButton;
+    private Button mInfoButton;
+    private ProgressBar mSpinner;
+    private SongListModel mModel;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +70,9 @@ public class MainActivity extends AppCompatActivity {
         Typeface face= Typeface.createFromAsset(getAssets(), "fonts/lobster.ttf");
         tv1.setTypeface(face);
 
+        mSpinner = (ProgressBar)findViewById(R.id.loading_spinner);
+        mStartButton = (Button)findViewById(R.id.button_recognize_start);
+        mInfoButton = (Button)findViewById(R.id.button_recognize_info);
         if (getString(R.string.subscription_key).startsWith("Please")) {
             new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.add_subscription_key_tip_title))
@@ -67,7 +81,32 @@ public class MainActivity extends AppCompatActivity {
                     .show();
         }
 
+        //Initialize the database;
+       // switchLoadingVisibility();
+        mModel = new SongListModel(this);
+
+        mSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary),
+                android.graphics.PorterDuff.Mode.MULTIPLY);
+        mModel.initializeSongList();
+
     }
+
+
+
+    public void switchLoadingVisibility(){
+        if(mSpinner.getVisibility() == View.GONE){
+            mSpinner.setVisibility(View.VISIBLE);
+            mStartButton.setVisibility(View.GONE);
+            mInfoButton.setVisibility(View.GONE);
+        }else{
+            mSpinner.setVisibility(View.GONE);
+            mInfoButton.setVisibility(View.VISIBLE);
+            mStartButton.setVisibility(View.VISIBLE);
+
+        }
+    }
+
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

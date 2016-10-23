@@ -64,21 +64,4 @@ public class MusicActivity extends AppCompatActivity{
             musicBound = false;
         }
     };
-
-    @Override
-    public void onStart(){
-        super.onStart();
-        if(playIntent==null) {
-            playIntent = new Intent(this, PlayerService.class);
-            bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
-            startService(playIntent);
-        }
-    }
-    @Override
-    protected void onDestroy() {
-        stopService(playIntent);
-        musicSrv=null;
-        super.onDestroy();
-    }
-
 }

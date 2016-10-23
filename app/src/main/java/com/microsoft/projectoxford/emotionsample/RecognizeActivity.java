@@ -32,9 +32,13 @@
 //
 package com.microsoft.projectoxford.emotionsample;
 
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.res.Configuration;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.hardware.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -44,8 +48,11 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
+import android.os.IBinder;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.MovementMethod;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.Menu;
@@ -55,7 +62,9 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -67,6 +76,9 @@ import com.microsoft.projectoxford.emotion.contract.RecognizeResult;
 import com.microsoft.projectoxford.emotion.rest.EmotionServiceException;
 import com.microsoft.projectoxford.emotionsample.helper.ImageHelper;
 
+import com.microsoft.projectoxford.emotionsample.initialization.MusicObject;
+import com.microsoft.projectoxford.emotionsample.initialization.SongListModel;
+import com.microsoft.projectoxford.emotionsample.musicPlayer.PlayerService;
 import com.microsoft.projectoxford.face.FaceServiceRestClient;
 import com.microsoft.projectoxford.face.contract.Face;
 
@@ -77,10 +89,31 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 public class RecognizeActivity extends AppCompatActivity implements SurfaceHolder.Callback {
+
+    /**
+     * Music player
+     */
+    private PlayerService musicSrv;
+    private Intent playIntent;
+    private boolean musicBound=false;
+    private List<MusicObject> songList = new ArrayList<>();
+    private SongListModel mModel;
+
+    private TextView mTitleText;
+    private ImageButton mPlayPause;
+    private ImageButton mForward;
+    private ImageButton mPrevious;
+    private SeekBar mSeekbar;
+
+    private Bitmap mPlayImg;
+    private Bitmap mPauseImg;
+
+    private String mEmotion = "Happy";
 
     // The button to select an image
     private Button mButtonSelectImage;
@@ -109,6 +142,38 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recognize);
 
+        //Music player code
+        mModel = new SongListModel(this);
+        mTitleText = (TextView)findViewById(R.id.title_text);
+        mSeekbar = (SeekBar)findViewById(R.id.seek_bar);
+        mPlayPause = (ImageButton)findViewById(R.id.play_pause);
+        mForward = (ImageButton)findViewById(R.id.forward);
+        mPrevious = (ImageButton)findViewById(R.id.previous);
+        mPauseImg = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_pause);
+        mPlayImg = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_play);
+
+        disablePlayer();
+        mSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                musicSrv.pauseSong();
+                musicSrv.setGetTimeResults(false);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                musicSrv.setSongTime(mSeekbar.getProgress());
+                musicSrv.resumeSong();
+                musicSrv.setGetTimeResults(true);
+            }
+        });
+
+        //Other Code
         if (client == null) {
             client = new EmotionServiceRestClient(getString(R.string.subscription_key));
         }
@@ -193,6 +258,8 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
                 return mediaFile;
             }
         };
+
+
     }
 
 
@@ -287,7 +354,6 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
 
         // Do emotion detection using auto-detected faces.
         try {
-            new doRequest(false).execute();
             new doRequest(false).execute();
         } catch (Exception e) {
             Log.e("Error Exception: ", e.toString());
@@ -467,6 +533,109 @@ public class RecognizeActivity extends AppCompatActivity implements SurfaceHolde
             }
 
             mButtonSelectImage.setEnabled(true);
+
+            /**
+             * Start the music playing here
+             */
+            enablePlayer();
+            musicSrv.setList(mModel.getCategoryList(null));
+            musicSrv.playSong();
+        }
+
+    }
+
+    /**
+     * MUSIC PLAYER FUNCTIONS
+     */
+    //connect to the service
+    private ServiceConnection musicConnection = new ServiceConnection() {
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            PlayerService.MusicBinder binder = (PlayerService.MusicBinder) service;
+            //get service
+            musicSrv = binder.getService();
+            binder.setListener(new PlayerService.MusicPlayerListener() {
+                @Override
+                public void sendProgress(int progress) {
+                    mSeekbar.setProgress(progress);
+                }
+
+                @Override
+                public void sendPlayerInfo(String title, String artist) {
+                    mTitleText.setText(mEmotion+":    " + title);
+
+                }
+                @Override
+                public void setMax(int maxTime){
+                    mSeekbar.setMax(maxTime);
+                }
+            });
+            //pass list
+            //musicSrv.setList(mModel.getCategoryList(null));
+            musicBound = true;
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            musicBound = false;
+        }
+    };
+
+    public void disablePlayer(){
+        mSeekbar.setEnabled(false);
+        mPlayPause.setEnabled(false);
+        mForward.setEnabled(false);
+        mPrevious.setEnabled(false);
+        mPlayPause.setColorFilter(getResources().getColor(R.color.button_disabled_background));
+        mForward.setColorFilter(getResources().getColor(R.color.button_disabled_background));
+        mPrevious.setColorFilter(getResources().getColor(R.color.button_disabled_background));
+
+    }
+    public void enablePlayer(){
+        mSeekbar.setEnabled(true);
+        mPlayPause.setEnabled(true);
+        mForward.setEnabled(true);
+        mPrevious.setEnabled(true);
+
+        mPlayPause.setColorFilter(getResources().getColor(R.color.black));
+        mForward.setColorFilter(getResources().getColor(R.color.black));
+        mPrevious.setColorFilter(getResources().getColor(R.color.black));
+
+    }
+    public void playPauseClick(View v){
+        if(musicSrv.pause_startSong()){
+            mPlayPause.setImageBitmap(mPlayImg);
+        }else{
+            mPlayPause.setImageBitmap(mPauseImg);
         }
     }
+    public void forwardClick(View v){
+        musicSrv.skipSong();
+    }
+    public void previousClick(View v){
+        musicSrv.prevSong();
+    }
+
+
+
+    /**
+     * Lifecycle functions for player
+     */
+    @Override
+    public void onStart(){
+        super.onStart();
+        if(playIntent==null) {
+            playIntent = new Intent(this, PlayerService.class);
+            bindService(playIntent, musicConnection, Context.BIND_AUTO_CREATE);
+            startService(playIntent);
+        }
+    }
+    @Override
+    protected void onDestroy() {
+        stopService(playIntent);
+        musicSrv=null;
+        super.onDestroy();
+    }
+
 }

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.os.PowerManager;
 
@@ -12,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.microsoft.projectoxford.emotionsample.RecognizeActivity;
 import com.microsoft.projectoxford.emotionsample.initialization.MusicObject;
 
 /**
@@ -22,6 +24,7 @@ public class PlayerService extends Service implements
         MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
         MediaPlayer.OnCompletionListener {
 
+    private final static int TIME_DELAY_FOR_UPDATE = 1000;//Time delay for progress bar in ms
     //media player
     private MediaPlayer player;
     //song list
@@ -30,6 +33,15 @@ public class PlayerService extends Service implements
     private int songPosn;
     //Binder
     private final IBinder musicBind = new MusicBinder();
+    //Listener
+    private MusicPlayerListener mListener;
+
+    //To keep track of progress
+    private boolean mGetTimeResults = true;
+    private boolean timerStarted = false;
+    private Handler timerHandler;
+    private CheckProgressRunnable timerRunnable;
+
     /**
      * Called when the service has been started from an activity
      */
@@ -43,6 +55,8 @@ public class PlayerService extends Service implements
      */
     public void onCreate(){
         super.onCreate();
+        timerHandler = new Handler();
+        timerRunnable = new CheckProgressRunnable();
         songPosn=0;
         player = new MediaPlayer();
         initMusicPlayer();
@@ -52,7 +66,7 @@ public class PlayerService extends Service implements
      */
     public void onDestroy(){
         super.onDestroy();
-
+        timerHandler.removeCallbacks(timerRunnable);
     }
 
     /**
@@ -91,6 +105,9 @@ public class PlayerService extends Service implements
         public PlayerService getService() {
             return PlayerService.this;
         }
+        public void setListener(MusicPlayerListener listener){
+            mListener = listener;
+        }
     }
 
     public void playSong(){
@@ -107,6 +124,7 @@ public class PlayerService extends Service implements
         try {
             player.setDataSource(playSong.getData());
             player.prepareAsync();
+            mListener.sendPlayerInfo(playSong.getTitle(),playSong.getArtist());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -119,6 +137,10 @@ public class PlayerService extends Service implements
         playSong();
     }
     public void prevSong(){
+        if(player.getCurrentPosition()>1500){
+            playSong();
+            return;
+        }
         songPosn--;
         if(songPosn<0){
             songPosn=songs.size();
@@ -132,11 +154,13 @@ public class PlayerService extends Service implements
         player.start();
 
     }
-    public void pause_startSong(){
+    public boolean pause_startSong(){
         if(player.isPlaying()){
-            pauseSong();
+            pauseSong(); //Makes button look like a play button
+            return true;
         }else{
-            resumeSong();
+            resumeSong(); //Makes button look like a stop button
+            return false;
         }
     }
 
@@ -144,6 +168,9 @@ public class PlayerService extends Service implements
         songPosn = index;
     }
 
+    public void setSongTime(int time){
+        player.seekTo(time);
+    }
 
     /**
      * Interface methods
@@ -161,5 +188,36 @@ public class PlayerService extends Service implements
     @Override
     public void onPrepared(MediaPlayer mediaPlayer) {
         player.start();
+        mListener.setMax(player.getDuration());
+        if(!timerStarted){
+            timerHandler.postDelayed(timerRunnable,0);
+            timerStarted = true;
+        }
+    }
+
+    /**
+     * Check timer runnable
+     */
+    public void setGetTimeResults(boolean getTime){
+        mGetTimeResults = getTime;
+    }
+    class CheckProgressRunnable implements Runnable{
+        @Override
+        public void run(){
+            if(mGetTimeResults) {
+                mListener.sendProgress(player.getCurrentPosition());
+            }
+            timerHandler.postDelayed(this,TIME_DELAY_FOR_UPDATE);
+        }
+
+    }
+
+    /**
+     * Interface methods for activity
+     */
+    public interface MusicPlayerListener {
+        void sendProgress(int progress);
+        void sendPlayerInfo(String title, String artist);
+        void setMax(int maxTime);
     }
 }

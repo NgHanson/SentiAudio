@@ -6,7 +6,9 @@
     <color name="button_disabled_background">#C0C0C0</color>
     <color name="colorPrimary">#26c6da</color>
     <color name="colorPrimaryDark">#2AA2B1</color>
-    <color name="backgroundColor">#FFFFFF</color>
+    <color name="backgroundColor">@color/white</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
     <!--Turquoise set colors-->
     <!--<color name="colorPrimary">#1ABC9C</color>-->
     <!--<color name="colorPrimaryDark">#16A085</color>-->
