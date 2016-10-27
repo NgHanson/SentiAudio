@@ -113,6 +113,8 @@ public class PlayerService extends Service implements
     public void playSong(){
         player.reset();
         //get song
+        if(songs.size()==0)
+            return;
         MusicObject playSong = songs.get(songPosn);
         /*get id
         long currSong = playSong.getD();

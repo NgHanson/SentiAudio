@@ -223,6 +223,8 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
         mButtonSelectImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                disablePlayer();
+                musicSrv.pauseSong();
                 try {
                     mTitleText.setText(R.string.loading_library);
                     takePicture();
