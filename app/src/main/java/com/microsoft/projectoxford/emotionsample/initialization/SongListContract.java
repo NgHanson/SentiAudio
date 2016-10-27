@@ -9,6 +9,8 @@ import android.provider.BaseColumns;
 public final class SongListContract {
     // To prevent someone from accidentally instantiating the contract class,
     // make the constructor private.
+    public static final String NO  = "no";
+    public static final String YES = "yes";
     private SongListContract() {}
 
     /* Inner class that defines the table contents */
@@ -18,5 +20,6 @@ public final class SongListContract {
         public static final String COLUMN_NAME_ARTIST = "artist";
         public static final String COLUMN_NAME_PATH = "path";
         public static final String COLUMN_NAME_CATEGORY = "category";
+        public static final String COLUMN_NAME_ANALYZED = "analyzed";
     }
 }

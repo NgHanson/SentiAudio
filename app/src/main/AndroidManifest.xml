@@ -19,11 +19,6 @@
         android:label="SentiAudio"
         android:theme="@style/AppTheme" >
 
-        <activity android:name=".initialization.InitActivity">
-
-        </activity>
-        <activity android:name=".musicPlayerExample.MusicActivity">
-        </activity>
         <service android:name=".musicPlayer.PlayerService"/>
         <activity
             android:name=".MainActivity"

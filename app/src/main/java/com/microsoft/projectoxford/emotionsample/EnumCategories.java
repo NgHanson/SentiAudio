@@ -6,6 +6,6 @@ package com.microsoft.projectoxford.emotionsample;
 
 public class EnumCategories {
     public enum Emotions {
-        ANGER, CONTEMPT, DISGUST, FEAR, HAPPINESS, NEUTRAL, SADDNESS, SUPRISED
+        Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprised
     }
 }

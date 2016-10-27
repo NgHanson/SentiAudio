@@ -34,20 +34,15 @@ package com.microsoft.projectoxford.emotionsample;
 
 import android.app.AlertDialog;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.ImageView;
 
 import com.microsoft.projectoxford.emotionsample.initialization.SongListModel;
 import com.microsoft.projectoxford.emotionsample.tarsos.AndroidFFMPEGLocator;
@@ -59,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements SongListModel.not
     private Button mInfoButton;
     private ProgressBar mSpinner;
     private SongListModel mModel;
-
+    private TextView mInfoMessage;
 
 
     @Override
@@ -74,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements SongListModel.not
         mSpinner = (ProgressBar)findViewById(R.id.loading_spinner);
         mStartButton = (Button)findViewById(R.id.button_recognize_start);
         mInfoButton = (Button)findViewById(R.id.button_recognize_info);
+        mInfoMessage = (TextView)findViewById(R.id.info_message);
         if (getString(R.string.subscription_key).startsWith("Please")) {
             new AlertDialog.Builder(this)
                     .setTitle(getString(R.string.add_subscription_key_tip_title))
@@ -83,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements SongListModel.not
         }
 
         //Initialize the database;
-       // switchLoadingVisibility();
+        switchLoadingVisibility();
         mModel = new SongListModel(this,this);
 
         mSpinner.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary),
@@ -98,17 +94,22 @@ public class MainActivity extends AppCompatActivity implements SongListModel.not
     public void switchLoadingVisibility(){
         if(mSpinner.getVisibility() == View.GONE){
             mSpinner.setVisibility(View.VISIBLE);
+            mInfoMessage.setVisibility(View.VISIBLE);
             mStartButton.setVisibility(View.GONE);
             mInfoButton.setVisibility(View.GONE);
         }else{
             mSpinner.setVisibility(View.GONE);
+            mInfoMessage.setVisibility(View.GONE);
             mInfoButton.setVisibility(View.VISIBLE);
             mStartButton.setVisibility(View.VISIBLE);
 
         }
     }
 
-
+    @Override
+    public void setInfoMessage(String message){
+        mInfoMessage.setText(message);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

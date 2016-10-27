@@ -203,6 +203,7 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
                 musicSrv.setSongTime(mSeekbar.getProgress());
                 musicSrv.resumeSong();
                 musicSrv.setGetTimeResults(true);
+                mPlayPause.setImageBitmap(mPauseImg);
             }
         });
 
@@ -317,6 +318,11 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
         }
         CameraManager manager = (CameraManager) getSystemService(Context.CAMERA_SERVICE);
 
+        mBitmap = textureView.getBitmap();
+        if (mBitmap != null) {
+            doRecognize();
+        }
+        /*
         try {
 
             CameraCharacteristics characteristics = manager.getCameraCharacteristics(cameraDevice.getId());
@@ -343,12 +349,12 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
             final File file = new File(Environment.getExternalStorageDirectory()+"/pic.jpg");
 
 
-
             //---------//
             mImageUri = Uri.fromFile(file);
             mBitmap = ImageHelper.loadSizeLimitedBitmapFromUri(
                     mImageUri, getContentResolver());
 
+            mBitmap = textureView.getBitmap();
             if (mBitmap != null) {
                 doRecognize();
             }
@@ -412,7 +418,7 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
             }, mBackgroundHandler);
         } catch (CameraAccessException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -575,18 +581,20 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
             JSONObject scores = jObj.getJSONObject("scores");
 
             HashMap<String, Double> emotionScores = new HashMap<>();
-            emotionScores.put("anger", scores.getDouble("anger"));
-            emotionScores.put("contempt", scores.getDouble("contempt"));
-            emotionScores.put("disgust", scores.getDouble("disgust"));
-            emotionScores.put("fear", scores.getDouble("fear"));
-            emotionScores.put("happiness", scores.getDouble("happiness"));
-            emotionScores.put("neutral", scores.getDouble("neutral"));
-            emotionScores.put("sadness", scores.getDouble("sadness"));
-            emotionScores.put("surprise", scores.getDouble("surprise"));
+            emotionScores.put("Anger", scores.getDouble("anger"));
+            emotionScores.put("Contempt", scores.getDouble("contempt"));
+            emotionScores.put("Disgust", scores.getDouble("disgust"));
+            emotionScores.put("Fear", scores.getDouble("fear"));
+            emotionScores.put("Happiness", scores.getDouble("happiness"));
+            emotionScores.put("Neutral", scores.getDouble("neutral"));
+            emotionScores.put("Sadness", scores.getDouble("sadness"));
+            emotionScores.put("Surprise", scores.getDouble("surprise"));
             double maxScore = Collections.max(emotionScores.values());
             for (Map.Entry<String, Double> entry : emotionScores.entrySet()) {
                 if (entry.getValue() == maxScore) {
                     Log.e("Max emotion score ", entry.getKey());
+                    //String testS = entry.getKey();
+                    mEmotion = entry.getKey();
                 }
             }
 
@@ -664,7 +672,39 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
              * Start the music playing here
              */
             enablePlayer();
-            musicSrv.setList(mModel.getCategoryList(null));
+
+            /**
+             *
+             Melancholy / Sadness / Loss / Sorrow / Pain: 50 to 85 BPM
+             Thoughtful / Introspective: 90-105 BPM
+             Happy / Party / Celebration: 110-125 BPM
+             Excitement / Energy / Danger / Anger: 130 BPM and up
+
+             Neutral=  All
+
+             Sadness/Contempt/Disgust
+             Happiness / Surprised
+             Anger Fear
+
+
+             emotionScores.put("Anger", scores.getDouble("anger"));
+             emotionScores.put("Contempt", scores.getDouble("contempt"));
+             emotionScores.put("Disgust", scores.getDouble("disgust"));
+             emotionScores.put("Fear", scores.getDouble("fear"));
+             emotionScores.put("Happiness", scores.getDouble("happiness"));
+             emotionScores.put("Neutral", scores.getDouble("neutral"));
+             emotionScores.put("Sadness", scores.getDouble("sadness"));
+             emotionScores.put("Surprise", scores.getDouble("surprise"));
+             */
+            if(mEmotion.equals("Sadness")||mEmotion.equals("Contempt")||mEmotion.equals("Disgust")){
+                musicSrv.setList(mModel.getCategoryList("Sadness"));
+            }else if(mEmotion.equals("Happiness")||mEmotion.equals("Surprise")){
+                musicSrv.setList(mModel.getCategoryList("Happiness"));
+            }else if(mEmotion.equals("Anger")||mEmotion.equals("Fear")){
+                musicSrv.setList(mModel.getCategoryList("Anger"));
+            }else{
+                musicSrv.setList(mModel.getCategoryList(null));
+            }
             musicSrv.playSong();
         }
 
@@ -766,4 +806,6 @@ public class RecognizeActivity extends AppCompatActivity implements SongListMode
     }
     @Override
     public void stopLoading(){}
+    @Override
+    public void setInfoMessage(String msg){}
 }

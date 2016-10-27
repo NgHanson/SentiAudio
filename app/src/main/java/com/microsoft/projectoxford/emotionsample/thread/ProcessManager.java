@@ -51,7 +51,7 @@ public class ProcessManager {
 
     public void executeTask(HandleMachineLearn decodeTask){
         mDecodeThreadPool.execute(decodeTask);
-        mDecodeThreadPool.submit(decodeTask);
+        //mDecodeThreadPool.submit(decodeTask); Don't run this twice
     }
 
 }

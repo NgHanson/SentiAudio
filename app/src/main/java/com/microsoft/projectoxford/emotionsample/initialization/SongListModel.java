@@ -15,6 +15,7 @@ import com.microsoft.projectoxford.emotionsample.tarsos.HandleMachineLearn;
 import com.microsoft.projectoxford.emotionsample.thread.ProcessManager;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
@@ -26,6 +27,7 @@ import static android.database.sqlite.SQLiteDatabase.CONFLICT_IGNORE;
 public class SongListModel {
 
     private Handler mHandler;
+    private SQLiteDatabase mDb;
     private SongListDbHelper mDbHelper;
     private Context mContext;
     private ProcessManager mManager;
@@ -36,6 +38,7 @@ public class SongListModel {
 
     public interface notifyMainClassListener{
         void stopLoading();
+        void setInfoMessage(String message);
     }
 
 
@@ -55,6 +58,7 @@ public class SongListModel {
                 if(mTasksCompleted == mTasksStarted){
                     //Notify UI;
                     mListener.stopLoading();
+                    mListener.setInfoMessage("Analyzing songs please wait.\nSongs analyzed: "+mTasksCompleted + "/" + mTasksStarted);
                 }
             }
         };
@@ -71,6 +75,7 @@ public class SongListModel {
         int count = 0;
 
 
+        mDb = mDbHelper.getWritableDatabase();
         if(cur != null)
         {
             count = cur.getCount();
@@ -88,16 +93,75 @@ public class SongListModel {
 
                         MusicObject obj = new MusicObject(title,data,artist,null);
 
-                        mManager.executeTask(new HandleMachineLearn(obj,mDbHelper,mHandler));
-                        mTasksStarted++;
+
+                        ContentValues values = new ContentValues();
+                        values.put(SongListContract.FeedEntry.COLUMN_NAME_TITLE, obj.getTitle());
+                        values.put(SongListContract.FeedEntry.COLUMN_NAME_ARTIST,obj.getArtist());
+                        values.put(SongListContract.FeedEntry.COLUMN_NAME_PATH, obj.getData());
+                        values.put(SongListContract.FeedEntry.COLUMN_NAME_CATEGORY, "NONE");
+                        values.put(SongListContract.FeedEntry.COLUMN_NAME_ANALYZED, SongListContract.NO );
+
+                        // Insert the new row, returning the primary key value of the new row
+                        long newRowId = mDb.insertWithOnConflict(SongListContract.FeedEntry.TABLE_NAME,null,values,CONFLICT_IGNORE);
+
 
                     }
                 }
             }
         }
         cur.close();
+
+        //See which songs to analyze
+        String[] projection = {
+                SongListContract.FeedEntry._ID,
+                SongListContract.FeedEntry.COLUMN_NAME_TITLE,
+                SongListContract.FeedEntry.COLUMN_NAME_ARTIST,
+                SongListContract.FeedEntry.COLUMN_NAME_PATH,
+                SongListContract.FeedEntry.COLUMN_NAME_CATEGORY,
+                SongListContract.FeedEntry.COLUMN_NAME_ANALYZED
+        };
+
+        // Filter results WHERE "title" = 'My Title'
+        String selectionDb = SongListContract.FeedEntry.COLUMN_NAME_ANALYZED + " = ?";
+        String[] selectorDb = new String[1];
+        selectorDb[0] = SongListContract.NO;
+        // How you want the results sorted in the resulting Cursor
+        String sortOrderDb =
+                SongListContract.FeedEntry.COLUMN_NAME_TITLE + " DESC";
+
+        Cursor c = mDb.query(
+                SongListContract.FeedEntry.TABLE_NAME,                     // The table to query
+                projection,                               // The columns to return
+                selectionDb,                                // The columns for the WHERE clause
+                selectorDb,                                     // The values for the WHERE clause
+                null,                                     // don't group the rows
+                null,                                     // don't filter by row groups
+                sortOrderDb                                 // The sort order
+        );
+        count = c.getCount();
+        try {
+            while (c.moveToNext()) {
+                String title = c.getString(c.getColumnIndexOrThrow(SongListContract.FeedEntry.COLUMN_NAME_TITLE));
+                String artist = c.getString(c.getColumnIndexOrThrow(SongListContract.FeedEntry.COLUMN_NAME_ARTIST));
+                String data = c.getString(c.getColumnIndexOrThrow(SongListContract.FeedEntry.COLUMN_NAME_PATH));
+                String category = c.getString(c.getColumnIndexOrThrow(SongListContract.FeedEntry.COLUMN_NAME_CATEGORY));
+                //list.add(new MusicObject(title,path,artist,category));
+                MusicObject obj = new MusicObject(title,data,artist,null);
+
+
+                mTasksStarted++;
+                mManager.executeTask(new HandleMachineLearn(obj,mDbHelper,mHandler));
+            }
+        } finally {
+            mDb.close();
+            c.close();
+            if(mTasksStarted==0){
+                mListener.stopLoading();
+            }
+        }
+
     }
-    public List<MusicObject> getCategoryList(String[] categorySelection){
+    public List<MusicObject> getCategoryList(String categorySelection){
         List<MusicObject> list = new ArrayList<>();
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         // Define a projection that specifies which columns from the database
@@ -107,11 +171,14 @@ public class SongListModel {
                 SongListContract.FeedEntry.COLUMN_NAME_TITLE,
                 SongListContract.FeedEntry.COLUMN_NAME_ARTIST,
                 SongListContract.FeedEntry.COLUMN_NAME_PATH,
-                SongListContract.FeedEntry.COLUMN_NAME_CATEGORY
+                SongListContract.FeedEntry.COLUMN_NAME_CATEGORY,
+                SongListContract.FeedEntry.COLUMN_NAME_ANALYZED
         };
         String selection = "";
-        String[] selectionArgs= categorySelection;
+        String[] selectionArgs = null;
         if(categorySelection!=null) {
+            selectionArgs = new String[1];
+            selectionArgs[0] = categorySelection;
             // Filter results WHERE "title" = 'My Title'
             selection = SongListContract.FeedEntry.COLUMN_NAME_CATEGORY + " = ?";
             //String[] selectionArgs = { "My Title" };
@@ -141,6 +208,8 @@ public class SongListModel {
             c.close();
         }
         db.close();
+
+        Collections.shuffle(list);
         return list;
     }
 }

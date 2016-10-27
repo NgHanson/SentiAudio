@@ -10,24 +10,18 @@
     <!-- Please refer to http://oxford-portal.azurewebsites.net/doc/general/subscription-key-mgmt to get your subscription key -->
     <!-- Please note that the Emotion API and Face API have different subscription keys -->
     <!-- You will need Face subscription key, besides the Emotion subscription keys, for the second part of the sample to work -->
-    <string name="faceSubscription_key">e171d05db3774ee1850217d5ee4f4d46</string>
 
     <!-- Display strings -->
     <string name="add_subscription_key_tip_title">Subscription Key is Needed</string>
     <string name="add_subscription_key_tip">Please put your two subscription keys for Emotion API/Face API to source file \"app/res/values/strings.xml\" to enable Emotion API and Face API calls.</string>
     <string name="action_settings">Settings</string>
+    <string name="action_analysis">Analyzing songs please wait.</string>
     <string name="title_activity_analyze">AnalyzeActivity</string>
-    <string name="title_activity_recognize">RecognizeActivity</string>
-    <string name="title_activity_thumbnail">ThumbnailActivity</string>
-    <string name="microsoft_notice">Microsoft will receive the images you upload and may use them to improve Emotion API and related services. By submitting an image, you confirm that you have consent from everyone in it.</string>
 
     <!-- Select image activity -->
-    <string name="select_an_image">Select an Image</string>
-    <string name="take_photo">Take a Photo</string>
-    <string name="select_image_in_album">From Gallery</string>
     <!-- player strings -->
     <string name="empty_title">No Input, Take a Picture to Start</string>
-    <string name="loading_library">Loading Library</string>
+    <string name="loading_library">Face Captured, Loading Library</string>
     <string name="play_pause">Play/Pause</string>
     <string name="forward">Forward</string>
     <string name="previous">Previous</string>
