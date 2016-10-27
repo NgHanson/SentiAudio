@@ -69,6 +69,7 @@ public class MainActivity extends AppCompatActivity implements SongListModel.not
         mSpinner = (ProgressBar)findViewById(R.id.loading_spinner);
         mStartButton = (Button)findViewById(R.id.button_recognize_start);
         mInfoButton = (Button)findViewById(R.id.button_recognize_info);
+        mInfoButton.setVisibility(View.GONE);
         mInfoMessage = (TextView)findViewById(R.id.info_message);
         if (getString(R.string.subscription_key).startsWith("Please")) {
             new AlertDialog.Builder(this)
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements SongListModel.not
         }else{
             mSpinner.setVisibility(View.GONE);
             mInfoMessage.setVisibility(View.GONE);
-            mInfoButton.setVisibility(View.VISIBLE);
+            mInfoButton.setVisibility(View.GONE);
             mStartButton.setVisibility(View.VISIBLE);
 
         }
