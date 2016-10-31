@@ -9,6 +9,11 @@ AWS S3 and Machine Learning
 Microsoft Project Oxford
 
 ####Example screenshots:
-![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/home_page.png)
-![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/camera_view.png)
-![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/training_data.png)
+![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/home_page.png)  
+
+The following image displays the camera view which allows users to capture images of themselves. This sample view acts as a audio player, seen on the bottom, as well.  
+![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/camera_view.png)  
+
+The following data was used to train the AWS machine learning model. The pitch was analyzed at a 44.1kHz sampling rate for the first 20 seconds of the file.
+![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/training_data.png)  
+
