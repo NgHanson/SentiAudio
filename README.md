@@ -8,7 +8,7 @@ TarsosDSP - A Real-time audio processing framework for Java
 AWS S3 and Machine Learning
 Microsoft Project Oxford
 
-####Example screenshots:
+#### Example screenshots:
 ![alt tag](https://github.com/NgHanson/SentiAudio/blob/master/Training_data_and_images/home_page.png)  
 
 The following image displays the camera view which allows users to capture images of themselves. This sample view acts as a audio player, seen on the bottom, as well.  
