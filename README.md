@@ -1,6 +1,8 @@
-# SentiAudio
+# [SentiAudio](https://devpost.com/software/senti-audio)
 ### by Christophe Gaboury, Hanson Ng, and Shabab Ayub
+
 Senti Audio is an android application that takes your audio files, sorts them by emotion, and plays whichever emotion that you are displaying on your face.
+
 
 *Tools:*   
 Android Studio  
